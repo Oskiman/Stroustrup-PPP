@@ -33,7 +33,7 @@ int main()
                 cout << my_guess << endl;      // Here for testing purposes
             }
             else {
-                my_guess = my_guess + (my_guess / 2);  // Find the midpoint in the upper half of the new range   
+                my_guess += (my_guess / 2);  // Find the midpoint in the upper half of the new range   
                 cout << my_guess << endl;      // Here for testing purposes
             }
 
