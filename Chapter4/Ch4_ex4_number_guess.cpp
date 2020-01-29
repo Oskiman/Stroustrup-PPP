@@ -13,6 +13,8 @@ int main()
     cout << "Answer Y or N only." << endl;
 
     int my_guess{ start_value / 2 };    // Get to midpoint of start_value to ask the first question
+    int my_prev_guess{ 0 };             // Holds previous value to help calculate number of choices left
+    int num_choices_left{ 0 };
     char user_input{};
 
     bool answer{ false };       // bool to break out of while loop when true (when we have the correct number!)
@@ -33,30 +35,43 @@ int main()
                 cout << my_guess << endl;      // Here for testing purposes
             }
             else {
-                my_guess += (my_guess / 2);  // Find the midpoint in the upper half of the new range   
+                my_guess += (my_guess / 2);  // Find the midpoint in the upper half of the new range  
                 cout << my_guess << endl;      // Here for testing purposes
+            }
+
+            // TODO
+            // need to compare my_guess and my_prev_guess
+
+            if (my_guess > my_prev_guess) {
+                num_choices_left = my_guess - my_prev_guess;
+                cout << num_choices_left << endl;       // Here for testing purposes
+            }
+            else {
+                num_choices_left = my_prev_guess - my_guess;
+                cout << num_choices_left << endl;       // Here for testing purposes
             }
 
         }
 
-        int final_answer{ 0 };
         // Calculate the number when we are down to the last couple of possibles
-        // How to get to the last couple though?
-        if (my_guess % 2 == 0) {
-            // number must be even
-            final_answer = my_guess / 2;
-        }
-        else {
-            // number must be odd
-            // No idea yet if this will work, the +1 is a placeholder & reminder
-            final_answer = (my_guess / 2) + 1;
-        }
+        if (num_choices_left == 2) {
+            int final_answer{ 0 };
+            
+            if (my_guess % 2 == 0) {
+                // number must be even
+                final_answer = my_guess % 2;
+            }
+            else {
+                // number must be odd
+                final_answer = (my_guess % 2) + 1;
+            }
 
-        // Bool check
-        // final_answer will have to be nonzero if correct, will break out of loop
-        if (final_answer != 0){
-        answer = true;
-        cout << "Your number is: " << final_answer << endl;
+            // Bool check
+            // final_answer will have to be nonzero if correct (or not!), will break out of loop
+            if (final_answer != 0) {
+                answer = true;
+                cout << "Your number is: " << final_answer << endl;
+            }
         }
     }
 }
